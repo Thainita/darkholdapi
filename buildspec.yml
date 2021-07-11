@@ -14,6 +14,6 @@ artifacts:
   files:
     - build/libs/*.jar
     - scripts/*.sh
-    - appspec.yaml
+    - appspec.yml
 #com/mycompany/app/helloworld.java, specify yes will [lace this file in /helloworld.java
 discard-paths: yes
