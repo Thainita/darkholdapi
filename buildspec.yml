@@ -7,13 +7,13 @@ phases:
   build:
     commands:
       - ./gradlew bootJar
-    post_build:
-      commands:
-        - echo Build completed
+  post_build:
+    commands:
+      - echo Build completed
 artifacts:
   files:
     - build/libs/*.jar
     - scripts/*.sh
     - appspec.yml
-#com/mycompany/app/helloworld.java, specify yes will [lace this file in /helloworld.java
-discard-paths: yes
+  #com/mycompany/app/HelloWorld.java, specifying yes will place this file in /HelloWorld.java
+  discard-paths: yes
