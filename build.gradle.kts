@@ -21,7 +21,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("it.skrape:skrapeit:1.1.5")
-	testImplementation("org.springframework.bogtiot:spring-boot-starter-test")
+	implementation ("com.google.code.gson:gson:2.8.5")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile> {
