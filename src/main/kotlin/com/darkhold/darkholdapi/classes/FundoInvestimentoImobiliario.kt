@@ -1,7 +1,7 @@
 package com.darkhold.darkholdapi.classes
 
 class FundoInvestimentoImobiliario (
-    var papel:String,
+    val papel:String,
     val segmento: String,
     val cotacao: String,
     val ffq: String,

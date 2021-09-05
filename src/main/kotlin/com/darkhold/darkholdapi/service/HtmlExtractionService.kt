@@ -34,7 +34,7 @@ class HtmlExtractionService {
                     tableContent = document.table {
                         tr {
                             findAll {
-                                eachText.drop(0).subList(1,10)
+                                eachText.drop(1)
                             }
                         }
                     }
@@ -48,22 +48,28 @@ class HtmlExtractionService {
                extracted.tableContent.get(extracted.tableContent.indexOf(element))
            ).useDelimiter("\\s\\s|\\t|\\s")
 
+           var papel: String = s.next()
+           val segmento: String = s.next()
+           val cotacao: String = s.next()
+           val ffq: String = s.next()
+           val dividendYield: String = s.next()
+           val pvp: String = s.next()
+           val valorDeMercado: String = s.next()
+           val liquidez: String = s.next()
+           val quantidadeDeImoveis: String = s.next()
+           val precoDoM2: String = s.next()
+           val AluguelPorM2: String = s.next()
+           val capRate: String = s.next()
+           var vacanciaMedia: String = " NADA "
+
+           if (!s.hasNext()){
+               continue
+           }else{
+               vacanciaMedia = s.next()
+           }
+
            investimentsList.add(
-               FundoInvestimentoImobiliario(
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next(),
-                   s.next()
-               )
+               FundoInvestimentoImobiliario(papel, segmento, cotacao, ffq, dividendYield, pvp, valorDeMercado, liquidez, quantidadeDeImoveis, precoDoM2, AluguelPorM2, capRate, vacanciaMedia)
            )
        }
         investimentsList.forEach {
