@@ -10,67 +10,80 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-data class MySimpleDataClass(
-    //val httpStatusCode: Int,
-    //val httpStatusMessage: String,
-    val tableContent: List<String>,
-    //val tableFirstContent: String,
+data class RequestScrappingClass(
+    val httpStatusCode: Int,
+    val httpStatusMessage: String,
+    val tableContent: List<String>
 )
 
 class HtmlExtractionService {
 
-    fun extract(): String {
+    val investimentsList: ArrayList<FundoInvestimentoImobiliario> = ArrayList()
+
+    fun extract(): ArrayList<FundoInvestimentoImobiliario> {
         val extracted = skrape(HttpFetcher) {
             request {
                 url = "https://fundamentus.com.br/fii_resultado.php"
             }
 
             response {
-                MySimpleDataClass(
+                RequestScrappingClass(
 
-                    //httpStatusCode = status { code },
-                    //httpStatusMessage = status { message },
-
-                    //tableContent = document.tr { td { findAll { eachText.drop(1).subList(0,2) } } }
-                    //tableContent = document.table { tr { td  { findAll { eachText.subList(0,4)} }} }
-                    tableContent = document.table { tr { findAll { eachText.drop(0).subList(1,4) } } }
-                    //tableFirstContent = document.tr { findFirst { text } }
+                    httpStatusCode = status { code },
+                    httpStatusMessage = status { message },
+                    tableContent = document.table {
+                        tr {
+                            findAll {
+                                eachText.drop(0).subList(1,10)
+                            }
+                        }
+                    }
                 )
             }
         }
-        //println(extracted.httpStatusCode)
-       // println(extracted.httpStatusMessage)
-       val investimentsList: ArrayList<FundoInvestimentoImobiliario> = ArrayList()
 
        for (element in extracted.tableContent) {
 
            val s: Scanner = Scanner(
                extracted.tableContent.get(extracted.tableContent.indexOf(element))
-           ).useDelimiter("\\s")
+           ).useDelimiter("\\s\\s|\\t|\\s")
 
            investimentsList.add(
                FundoInvestimentoImobiliario(
                    s.next(),
+                   s.next(),
+                   s.next(),
+                   s.next(),
+                   s.next(),
+                   s.next(),
+                   s.next(),
+                   s.next(),
+                   s.next(),
+                   s.next(),
+                   s.next(),
+                   s.next(),
                    s.next()
                )
            )
-
-       //extracted.tableContent.map { FundosInvestimentoImobiliario(extracted.tableContent.get(1))}
        }
-
-//        extracted.tableContent.forEach {
-//            investimentoImobiliario.papel = it
-//        }
-
-//        listOf(extracted.tableContent).forEach {
-//            if (it.size == 13) return@forEach // local return to the caller of the lambda - the forEach loop
-//            print(it)
-//        }
-
-
-
-        investimentsList.forEach { println( "Investimento: " + it.papel + " " + it.segmento) }
-        return extracted.tableContent.toString()
+        investimentsList.forEach {
+            println( "Registro: " +
+                    it.papel + " "
+                    + it.segmento + " "
+                    + it.cotacao + " "
+                    + it.ffq + " "
+                    + it.dividendYield + " "
+                    + it.pvp + " "
+                    + it.valorDeMercado + " "
+                    + it.liquidez + " "
+                    + it.quantidadeDeImoveis + " "
+                    + it.precoDoM2 + " "
+                    + it.AluguelPorM2 + " "
+                    + it.capRate + " "
+                    + it.vacanciaMedia
+            )
+        }
+        return investimentsList
     }
 
 }

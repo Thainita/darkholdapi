@@ -1,5 +1,6 @@
 package com.darkhold.darkholdapi.controller
 
+import com.darkhold.darkholdapi.classes.FundoInvestimentoImobiliario
 import com.darkhold.darkholdapi.classes.HtmlExtractionService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -14,5 +15,5 @@ class HelloWorldController {
 
     @GetMapping
     @RequestMapping("/fii")
-    fun fii(): String = HtmlExtractionService().extract()
+    fun fii(): ArrayList<FundoInvestimentoImobiliario> = HtmlExtractionService().extract()
 }
